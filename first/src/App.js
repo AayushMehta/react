@@ -9,6 +9,7 @@ const App = () => {
     color: "black",
   });
   const [modal, setModal] = useState(false);
+  const [uiSwitch, setuiSwitch] = useState(false);
 
   const names = [
     {
@@ -251,16 +252,17 @@ const App = () => {
   //   }
   // }
 
-  const nameDiplay = () => {
-    names.map((name) => {
-      if (name.name[0] === "M") {
-        console.log(name.name);
-        return <p>{name.name}</p>;
-      }
-    });
-  };
+  // const nameDiplay = () => {
+  //   names.map((name) => {
+  //     if (name.name[0] === "M") {
+  //       console.log(name.name);
+  //       return <p>{name.name}</p>;
+  //     }
+  //   });
+  // };
 
   const clickHandler = () => {
+    setuiSwitch((uiSwitch) => !uiSwitch);
     if (stylee.color === "black") {
       setStylee({
         background: "black",
@@ -327,7 +329,9 @@ const App = () => {
       <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses items={expenses} />
       <div style={stylee}>
-        <button onClick={clickHandler}>Click me</button>
+        <button onClick={clickHandler}>
+          {uiSwitch ? "Light Mdoe" : "Dark Mdoe"}
+        </button>
         {names.map((name) => {
           if (name.name[0] === "M") {
             return <p key={name.id}>{name.name}</p>;
