@@ -8,6 +8,7 @@ const App = () => {
     background: "white",
     color: "black",
   });
+  const [modal, setModal] = useState(false);
 
   const names = [
     {
@@ -250,11 +251,13 @@ const App = () => {
   //   }
   // }
 
-  const NameDiplay = () => {
+  const nameDiplay = () => {
     names.map((name) => {
-      if (name.name[0] === "M") console.log(name.name);
+      if (name.name[0] === "M") {
+        console.log(name.name);
+        return <p>{name.name}</p>;
+      }
     });
-    return <p>name.name</p>;
   };
 
   const clickHandler = () => {
@@ -313,13 +316,29 @@ const App = () => {
   //   React.createElement(Expenses, { items: expenses })
   // );
 
+  // nameDiplay();
+
+  const buttonHandler = () => {
+    setModal((modal) => !modal);
+  };
+
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses items={expenses} />
       <div style={stylee}>
         <button onClick={clickHandler}>Click me</button>
-        {NameDiplay()}
+        {names.map((name) => {
+          if (name.name[0] === "M") {
+            return <p key={name.id}>{name.name}</p>;
+          }
+        })}
+      </div>
+
+      <div style={{ height: "100vh", background: "azure" }}>
+        <button onClick={buttonHandler}>{modal ? "Hide" : "Open"} Modal</button>
+        {modal && <div>This is modal</div>}
+        {modal ? <div>This is modal</div> : undefined}
       </div>
     </div>
   );
