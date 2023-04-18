@@ -4,6 +4,8 @@ import NewExpense from "./components/NewExpense/NewExpense";
 import Expenses from "./components/Expenses/Expenses";
 
 const App = () => {
+  // state handling start
+
   const [stylee, setStylee] = useState({
     background: "white",
     color: "black",
@@ -11,6 +13,16 @@ const App = () => {
   const [modal, setModal] = useState(false);
   const [uiSwitch, setuiSwitch] = useState(false);
 
+  const [step, setstep] = useState(0);
+
+  const [userInput, setuserInput] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    number: "",
+  });
+
+  // state handling ends
   const names = [
     {
       id: 1,
@@ -324,25 +336,94 @@ const App = () => {
     setModal((modal) => !modal);
   };
 
+  const nextButtonHandler = () => {
+    setstep(step + 1);
+  };
+
+  const prevButtonHandler = () => {
+    setstep(step - 1);
+  };
+
+  const submitButtonHandler = (e) => {
+    e.preventDefault();
+  };
+
+  const step1 = () => {
+    return (
+      <div>
+        <p>form 1</p>
+        <input type="email" name="email" placeholder="Email" />
+        <button onClick={nextButtonHandler}>Next</button>
+        {console.log(step)}
+      </div>
+    );
+  };
+  const step2 = () => {
+    return (
+      <div>
+        <p>form 2</p>
+        <input type="text" name="firstname" placeholder="First Name" />
+        <input type="text" name="lastName" placeholder="Last Name" />
+
+        <button onClick={prevButtonHandler}>Previous</button>
+        <button onClick={nextButtonHandler}>Next</button>
+        {console.log(step)}
+      </div>
+    );
+  };
+  const step3 = () => {
+    return (
+      <div>
+        <p>form 3</p>
+        <input type="tel" name="phone" placeholder="Phone Number" />
+        <button onClick={prevButtonHandler}>Previous</button>
+        <button onClick={submitButtonHandler}>Submit</button>
+        {console.log(step)}
+      </div>
+    );
+  };
+
   return (
     <div>
-      <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses items={expenses} />
       <div style={stylee}>
         <button onClick={clickHandler}>
           {uiSwitch ? "Light Mdoe" : "Dark Mdoe"}
         </button>
+        <hr />
+        <NewExpense onAddExpense={addExpenseHandler} />
+        <Expenses items={expenses} />
+        <hr />
         {names.map((name) => {
           if (name.name[0] === "M") {
             return <p key={name.id}>{name.name}</p>;
           }
         })}
-      </div>
-
-      <div style={{ height: "100vh", background: "azure" }}>
-        <button onClick={buttonHandler}>{modal ? "Hide" : "Open"} Modal</button>
-        {modal && <div>This is modal</div>}
-        {modal ? <div>This is modal</div> : undefined}
+        <hr />
+        <div style={{ height: "50vh" }}>
+          <button onClick={buttonHandler}>
+            {modal ? "Hide" : "Open"} Modal
+          </button>
+          {modal && <div>This is modal</div>}
+          {modal ? <div>This is modal</div> : undefined}
+        </div>
+        <hr />
+        <div
+          style={{
+            // outline: "5px solid red",
+            width: "50vw",
+            display: "flex",
+            justifyContent: "center",
+            margin: "0 auto",
+            marginBottom: "2rem",
+          }}
+        >
+          {step === 0 && step1()}
+          {step === 1 && step2()}
+          {step === 2 && step3()}
+        </div>
+        <div>
+          <hr />
+        </div>
       </div>
     </div>
   );
