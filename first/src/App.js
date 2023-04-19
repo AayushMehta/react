@@ -346,6 +346,7 @@ const App = () => {
 
   const submitButtonHandler = (e) => {
     e.preventDefault();
+    alert("form submitted");
   };
 
   const step1 = () => {
