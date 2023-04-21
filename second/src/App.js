@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Not a user");
-        }
-        return response.json();
-      })
-      .then((json) => setUsers(json))
+    axios
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.data)
+      .then((response) => setUsers(response))
       .catch((error) => console.log(error));
   }, []);
 

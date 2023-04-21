@@ -365,7 +365,6 @@ const App = () => {
         <p>form 2</p>
         <input type="text" name="firstname" placeholder="First Name" />
         <input type="text" name="lastName" placeholder="Last Name" />
-
         <button onClick={prevButtonHandler}>Previous</button>
         <button onClick={nextButtonHandler}>Next</button>
         {console.log(step)}
