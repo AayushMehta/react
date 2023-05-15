@@ -9,6 +9,7 @@ const Counter = () => {
   const [count, setCount] = useState(0);
   const [color, setColor] = useState("");
   const [divBy5, setDivBy5] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const number = [2, 3, 4, 5, 7, 10, 14, 15];
   const navBar = [
@@ -96,6 +97,10 @@ const Counter = () => {
     setCount(count - 1);
   };
 
+  const checkBoxHandler = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <div style={{ backgroundColor: color }}>
       <p>Count: {count}</p>
@@ -112,6 +117,12 @@ const Counter = () => {
       )}
       <p> Odd Numbers : {odd.join(",")}</p>
       <p> Even Numbers : {even.join(",")}</p>
+      <input type="checkbox" checked={isChecked} onChange={checkBoxHandler} />
+      <select disabled={!isChecked}>
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+      </select>
     </div>
   );
 };
